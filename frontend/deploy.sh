@@ -40,7 +40,7 @@ set -e
 # ----------------------
 IMAGE_NAME="rj1608/react-vite-k8s"
 NAMESPACE="nodejs-app"
-APP_DIR="/home/ubuntu/kind-cluster/kube-in-one-shot/nodejs-k8s-aws"
+APP_DIR="/home/ubuntu/kind-cluster/kube-in-one-shot/mern-aws-ec2-docker-kubernetes/frontend"
 K8S_DIR="$APP_DIR/k8s"
 PORT_FORWARD_LOG="portforward.log"
 
@@ -147,14 +147,14 @@ kubectl get svc -n "$NAMESPACE"
 # Port Forwarding
 # ----------------------
 echo "🌐 Starting port-forwarding: 4000 -> 6000"
-nohup kubectl port-forward service/nodejs-app-service -n "$NAMESPACE" 4000:6000 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &
+nohup kubectl port-forward service/nodejs-app-service -n "$NAMESPACE" 3000:7000 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &
 
 echo "📋 Running processes using kubectl:"
 ps aux | grep "[k]ubectl"
 
 echo "===================================="
 echo "✅ Deployment Complete!"
-echo "🌍 Access your app at: http://<your-ec2-ip>:4000"
+echo "🌍 Access your app at: http://<your-ec2-ip>:3000"
 echo "📝 Logs: $PORT_FORWARD_LOG"
 echo "===================================="
 

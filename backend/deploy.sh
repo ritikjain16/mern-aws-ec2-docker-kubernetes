@@ -40,7 +40,7 @@ set -e
 # ----------------------
 IMAGE_NAME="rj1608/nodejs-app-k8s"
 NAMESPACE="nodejs-app"
-APP_DIR="/home/ubuntu/kind-cluster/kube-in-one-shot/nodejs-k8s-aws"
+APP_DIR="/home/ubuntu/kind-cluster/kube-in-one-shot/mern-aws-ec2-docker-kubernetes/backend"
 K8S_DIR="$APP_DIR/k8s"
 PORT_FORWARD_LOG="portforward.log"
 
