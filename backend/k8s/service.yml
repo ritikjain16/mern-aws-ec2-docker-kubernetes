@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nodejs-app-service
+  namespace: nodejs-app
+spec:
+  selector:
+    app: nodejs-app
+  ports:
+    - protocol: TCP
+      port: 6000
+      targetPort: 6000
+  type: ClusterIP
