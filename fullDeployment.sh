@@ -45,9 +45,6 @@ done
 # Helper Functions
 # ----------------------
 
-pkill -f "kubectl port-forward service/nodejs-app-service"
-pkill -f "kubectl port-forward service/react-vite-service"
-
 function deploy_component() {
   local NAME=$1
   local IMAGE=$2
