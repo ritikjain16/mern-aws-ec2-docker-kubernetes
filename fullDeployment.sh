@@ -45,6 +45,21 @@ done
 # Helper Functions
 # ----------------------
 
+function stop_existing_port_forwards() {
+  local NAME=$1
+  local SERVICE_NAME=$2
+
+  echo "🛑 Stopping existing port-forward for [$NAME]..."
+  PID=$(pgrep -f "kubectl port-forward service/$SERVICE_NAME")
+  if [ -n "$PID" ]; then
+    kill "$PID"
+    echo "✅ Killed port-forward PID: $PID for service/$SERVICE_NAME"
+  else
+    echo "ℹ️ No existing port-forward found for service/$SERVICE_NAME"
+  fi
+}
+
+
 function deploy_component() {
   local NAME=$1
   local IMAGE=$2
@@ -120,6 +135,13 @@ function deploy_component() {
   kubectl get pods -n "$NAMESPACE"
   kubectl get deployments -n "$NAMESPACE"
   kubectl get svc -n "$NAMESPACE"
+
+  # Stop existing port-forward
+  if [ "$NAME" == "backend" ]; then
+    stop_existing_port_forwards backend nodejs-app-service
+  else
+    stop_existing_port_forwards frontend react-vite-service
+  fi
 
   # Port forwarding
   echo "🌐 Starting port-forwarding for [$NAME]..."
