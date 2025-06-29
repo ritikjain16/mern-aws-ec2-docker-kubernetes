@@ -9,6 +9,11 @@ FRONTEND_IMAGE="rj1608/react-vite-k8s"
 NAMESPACE="nodejs-app"
 ROOT_DIR="/home/ubuntu/kind-cluster/kube-in-one-shot/mern-aws-ec2-docker-kubernetes"
 
+# ----------------------
+# Detect EC2 Public IP
+# ----------------------
+EC2_IP=$(curl -s http://checkip.amazonaws.com)
+
 # Component details
 declare -A COMPONENTS=(
   [backend]="$BACKEND_IMAGE:$ROOT_DIR/backend"
@@ -120,10 +125,10 @@ function deploy_component() {
   echo "🌐 Starting port-forwarding for [$NAME]..."
   if [ "$NAME" == "backend" ]; then
     nohup kubectl port-forward service/nodejs-app-service -n "$NAMESPACE" 4000:6000 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &
-    echo "🌍 Backend available at: http://<your-ec2-ip>:4000"
+    echo "🌍 Backend available at: http://$EC2_IP:4000"
   else
     nohup kubectl port-forward service/react-vite-service -n "$NAMESPACE" 3000:80 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &
-    echo "🌍 Frontend available at: http://<your-ec2-ip>:3000"
+    echo "🌍 Frontend available at: http://$EC2_IP:3000"
   fi
 
   echo "📋 kubectl processes:"
