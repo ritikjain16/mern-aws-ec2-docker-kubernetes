@@ -21,7 +21,7 @@ app.get("/hello", (req, res) => {
   res
     .status(200)
     .send({
-      msg: "Hello, This is Node js CI CD Devops project with docker and aws ec2",
+      msg: "Hello, This is Node js CI CD Devops project with docker and aws ec2 222",
     });
 });
 
