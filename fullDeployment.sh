@@ -52,8 +52,11 @@ function stop_existing_port_forwards() {
   echo "🛑 Stopping existing port-forward for [$NAME]..."
   PID=$(pgrep -f "kubectl port-forward service/$SERVICE_NAME")
   if [ -n "$PID" ]; then
-    kill "$PID"
-    echo "✅ Killed port-forward PID: $PID for service/$SERVICE_NAME"
+    if kill "$PID" 2>/dev/null; then
+      echo "✅ Killed port-forward PID: $PID for service/$SERVICE_NAME"
+    else
+      echo "⚠️ Failed to kill PID: $PID (may have already exited)"
+    fi
   else
     echo "ℹ️ No existing port-forward found for service/$SERVICE_NAME"
   fi
