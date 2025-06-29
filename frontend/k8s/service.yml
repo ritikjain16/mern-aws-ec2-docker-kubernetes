@@ -8,6 +8,6 @@ spec:
     app: react-vite
   ports:
     - protocol: TCP
-      port: 7000
-      targetPort: 7000
+      port: 80
+      targetPort: 80
   type: ClusterIP

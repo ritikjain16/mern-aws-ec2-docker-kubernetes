@@ -77,7 +77,7 @@ echo "📁 Changing to K8s directory..."
 cd "$K8S_DIR"
 
 echo "🧹 Deleting old Kubernetes resources (if any)..."
-kubectl delete -f namespace.yml -f deployment.yml -f service.yml || echo "⚠️ Continue even if delete fails."
+kubectl delete -f deployment.yml -f service.yml || echo "⚠️ Continue even if delete fails."
 
 # ----------------------
 # Docker Image Build & Push
@@ -94,7 +94,7 @@ docker push "$IMAGE_NAME"
 # ----------------------
 echo "📁 Applying new Kubernetes resources..."
 cd "$K8S_DIR"
-kubectl apply -f namespace.yml -f deployment.yml -f service.yml
+kubectl apply -f deployment.yml -f service.yml
 
 # ----------------------
 # Wait for Pods to be Ready
@@ -147,7 +147,7 @@ kubectl get svc -n "$NAMESPACE"
 # Port Forwarding
 # ----------------------
 echo "🌐 Starting port-forwarding: 4000 -> 6000"
-nohup kubectl port-forward service/nodejs-app-service -n "$NAMESPACE" 3000:7000 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &
+nohup kubectl port-forward service/nodejs-app-service -n "$NAMESPACE" 3000:80 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &
 
 echo "📋 Running processes using kubectl:"
 ps aux | grep "[k]ubectl"
