@@ -22,9 +22,9 @@
 
 # sleep 20
 
-# # kubectl port-forward service/nodejs-app-service -n nodejs-app 4000:6000 --address=0.0.0.0
+# # kubectl port-forward service/react-vite-service -n nodejs-app 4000:6000 --address=0.0.0.0
 
-# nohup kubectl port-forward service/nodejs-app-service -n nodejs-app 4000:6000 --address=0.0.0.0 > portforward.log 2>&1 &
+# nohup kubectl port-forward service/react-vite-service -n nodejs-app 4000:6000 --address=0.0.0.0 > portforward.log 2>&1 &
 
 # ps aux | grep kubectl
 
@@ -146,8 +146,8 @@ kubectl get svc -n "$NAMESPACE"
 # ----------------------
 # Port Forwarding
 # ----------------------
-echo "🌐 Starting port-forwarding: 4000 -> 6000"
-nohup kubectl port-forward service/nodejs-app-service -n "$NAMESPACE" 3000:80 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &
+echo "🌐 Starting port-forwarding: 3000 -> 80"
+nohup kubectl port-forward service/react-vite-service -n "$NAMESPACE" 3000:80 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &
 
 echo "📋 Running processes using kubectl:"
 ps aux | grep "[k]ubectl"
