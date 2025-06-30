@@ -124,7 +124,7 @@ function deploy_component() {
   # Port forwarding
   echo "🌐 Starting port-forwarding for [$NAME]..."
   if [ "$NAME" == "backend" ]; then
-    nohup kubectl port-forward service/nodejs-app-service -n "$NAMESPACE" 4000:6000 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &
+    nohup kubectl port-forward service/nodejs-app-service -n "$NAMESPACE" 4000:5000 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &
     echo "🌍 Backend available at: http://$EC2_IP:4000"
   else
     nohup kubectl port-forward service/react-vite-service -n "$NAMESPACE" 3000:80 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &

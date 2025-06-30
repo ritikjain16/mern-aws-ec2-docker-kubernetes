@@ -21,3 +21,6 @@ spec:
           image: rj1608/nodejs-app-k8s
           ports:
             - containerPort: 80
+          env:
+            - name: "PORT"
+              value: "5000"
